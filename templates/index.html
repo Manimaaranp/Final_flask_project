@@ -1,80 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="text-center mt-5">
 
-    <title>Career Roadmap Generator</title>
+    <h1>Career Roadmap Generator</h1>
+    <p class="text-muted">AI-powered learning paths for any career</p>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <input id="careerInput" class="form-control w-50 mx-auto mt-4"
+           placeholder="Enter career (e.g. Data Scientist)">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+    <button class="btn btn-primary mt-3" onclick="generateRoadmap()">
+        Generate Roadmap
+    </button>
 
-<body>
+</div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <span class="navbar-brand fw-bold">
-                Career Roadmap Generator
-            </span>
-        </div>
-    </nav>
-
-    <!-- MAIN CONTENT -->
-    <div class="container mt-5">
-
-        <!-- INPUT CARD -->
-        <div class="card p-5 shadow-sm">
-
-            <!-- TITLE -->
-            <h2 class="text-center mb-3 fw-bold">
-                Build Your Career Roadmap
-            </h2>
-
-            <!-- SUBTITLE -->
-            <p class="text-center text-muted mb-4">
-                Enter a career and get an AI-powered learning path
-            </p>
-
-            <!-- FORM -->
-            <form action="#" method="POST">
-
-                <input type="text"
-                       class="form-control mb-3"
-                       name="career"
-                       placeholder="Enter Career (e.g. Data Scientist)"
-                       required>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Generate Roadmap
-                </button>
-
-            </form>
-
-        </div>
-
-        <!-- INFO SECTION (CLEAN HINTS) -->
-        <div class="mt-4 text-center">
-
-            <p class="text-muted mb-2">
-                💡 Popular Career Choices
-            </p>
-
-            <span class="badge bg-light text-dark m-1">Data Scientist</span>
-            <span class="badge bg-light text-dark m-1">AI Engineer</span>
-            <span class="badge bg-light text-dark m-1">DevOps Engineer</span>
-            <span class="badge bg-light text-dark m-1">Cybersecurity Analyst</span>
-            <span class="badge bg-light text-dark m-1">Frontend Developer</span>
-
-        </div>
-
-    </div>
-
-</body>
-
-</html>
+{% endblock %}
