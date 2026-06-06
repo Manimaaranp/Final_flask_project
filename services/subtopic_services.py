@@ -1,5 +1,8 @@
 from database import db
 from models import Topic, SubTopic
+from services.ai_service import (
+    AIService
+)
 
 
 class SubTopicService:
@@ -67,12 +70,13 @@ class SubTopicService:
         topic = Topic.query.filter_by(
             name=topic_name
         ).first()
+        
 
         if not topic:
             return {
                 "error": "Topic not found"
             }
-
+        career_name = topic.career.name
         existing_subtopics = SubTopic.query.filter_by(
             topic_id=topic.id
         ).all()
@@ -89,8 +93,9 @@ class SubTopicService:
             }
 
         generated_subtopics = (
-            SubTopicService.generate_mock_subtopics(
-                topic_name
+            AIService.generate_subtopics(
+                topic_name,
+                career_name
             )
         )
 

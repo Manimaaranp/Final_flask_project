@@ -17,10 +17,10 @@ subtopic_bp = Blueprint(
 def generate_subtopics():
 
     data = request.get_json()
-
     topic_name = data.get(
         "topic_name"
     )
+    
 
     if not topic_name:
 

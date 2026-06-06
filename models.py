@@ -87,16 +87,76 @@ class LearningContent(db.Model):
 class Quiz(db.Model):
     __tablename__ = "quizzes"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
-    question = db.Column(db.Text, nullable=False)
+    question = db.Column(
+        db.Text,
+        nullable=False
+    )
 
-    answer = db.Column(db.Text, nullable=False)
+    option_a = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    option_b = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    option_c = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    option_d = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    correct_answer = db.Column(
+        db.String(1),
+        nullable=False
+    )
 
     subtopic_id = db.Column(
         db.Integer,
-        db.ForeignKey("subtopics.id"),
+        db.ForeignKey(
+            "subtopics.id"
+        ),
         nullable=False
+    )
+
+    attempts = db.relationship(
+        "QuizAttempt",
+        backref="quiz",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
+
+
+class QuizAttempt(db.Model):
+    __tablename__ = "quiz_attempts"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    quiz_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "quizzes.id"
+        ),
+        nullable=False
+    )
+
+    answered_correctly = db.Column(
+        db.Boolean,
+        default=False
     )
 
 

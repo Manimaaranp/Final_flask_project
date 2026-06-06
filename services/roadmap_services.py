@@ -1,5 +1,8 @@
 from models import Career, Topic
 from database import db
+from services.ai_service import (
+    AIService
+)
 
 
 class RoadmapService:
@@ -77,7 +80,7 @@ class RoadmapService:
         db.session.commit()
 
         generated_topics = (
-            RoadmapService.generate_mock_topics(
+            AIService.generate_roadmap_topics(
                 career_name
             )
         )
