@@ -8,6 +8,9 @@ from routes.content_routes import (
 )
 from routes.quiz_routes import quiz_bp
 from routes.progress_routes import progress_bp
+from routes.pages_routes import (
+    page_bp
+)
 
 app = Flask(__name__)
 
@@ -44,6 +47,10 @@ app.register_blueprint(
 app.register_blueprint(
     progress_bp,
     url_prefix="/api"
+)
+
+app.register_blueprint(
+    page_bp
 )
 if __name__ == "__main__":
     app.run(debug=True)
