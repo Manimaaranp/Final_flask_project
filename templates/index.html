@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1>Career Roadmap Generator</h1>
+    <p class="text-muted">AI-powered learning paths for any career</p>
+
+    <input id="careerInput" class="form-control w-50 mx-auto mt-4"
+           placeholder="Enter career (e.g. Data Scientist)">
+
+    <button class="btn btn-primary mt-3" onclick="generateRoadmap()">
+        Generate Roadmap
+    </button>
+
+</div>
+
+{% endblock %}
