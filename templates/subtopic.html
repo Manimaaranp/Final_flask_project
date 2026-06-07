@@ -6,18 +6,31 @@
 
     <h2>Subtopics</h2>
 
+    <h4 class="mt-4">Learning Progress</h4>
+
+    <div
+        class="progress mb-3"
+        style="height: 30px;"
+    >
+        <div
+            id="progressBar"
+            class="progress-bar bg-success"
+            role="progressbar"
+            style="width: 0%;"
+        >
+            0%
+        </div>
+    </div>
+
+    <p
+        id="progressText"
+        class="mb-4"
+    >
+        Loading progress...
+    </p>
+
     <div id="subtopicContainer"></div>
 
-</div>
-<div class="progress mt-3">
-    <div
-        id="progressBar"
-        class="progress-bar"
-        role="progressbar"
-        style="width:0%"
-    >
-        0%
-    </div>
 </div>
 
 {% endblock %}

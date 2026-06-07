@@ -53,10 +53,28 @@ class ProgressService:
             SubTopic.query.count()
         )
 
-        completed_subtopics = (
+        completed_progress = (
             UserProgress.query.filter_by(
                 completed=True
-            ).count()
+            ).all()
+        )
+
+        completed_subtopic_names = []
+
+        for progress in completed_progress:
+
+            subtopic = SubTopic.query.get(
+                progress.subtopic_id
+            )
+
+            if subtopic:
+
+                completed_subtopic_names.append(
+                    subtopic.name
+                )
+
+        completed_subtopics = len(
+            completed_subtopic_names
         )
 
         percentage = 0
@@ -77,6 +95,9 @@ class ProgressService:
 
             "completed_subtopics":
                 completed_subtopics,
+
+            "completed_subtopic_names":
+                completed_subtopic_names,
 
             "progress_percentage":
                 percentage

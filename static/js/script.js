@@ -177,16 +177,42 @@ async function loadSubtopics() {
                 }
             );
 
+        const progress =
+            await API.get(
+                "/api/progress"
+            );
+
+        const completedSubtopics =
+            progress.completed_subtopic_names || [];
+
         container.innerHTML =
             data.subtopics
-                .map(subtopic => `
-                    <div
-                        class="card-box"
-                        onclick="selectSubtopic('${subtopic}')"
-                    >
-                        ${subtopic}
-                    </div>
-                `)
+                .map(subtopic => {
+
+                    const completed =
+                        completedSubtopics.includes(
+                            subtopic
+                        );
+
+                    return `
+                        <div
+                            class="
+                                card-box
+                                ${completed
+                                    ? "completed-subtopic"
+                                    : ""}
+                            "
+                            onclick="
+                                selectSubtopic(
+                                    '${subtopic}'
+                                )
+                            "
+                        >
+                            ${completed ? "✅ " : ""}
+                            ${subtopic}
+                        </div>
+                    `;
+                })
                 .join("");
 
     } catch (error) {
@@ -315,6 +341,7 @@ async function loadQuiz() {
                 .map((quiz, index) => `
                     <div
                         class="card-box mb-4"
+                        id="quiz-card-${quiz.id}"
                     >
                         <h5>
                             Q${index + 1}.
@@ -362,6 +389,7 @@ async function loadQuiz() {
                         <br>
 
                         <button
+                            id="submit-btn-${quiz.id}"
                             class="btn btn-success mt-2"
                             onclick="submitQuiz(${quiz.id})"
                         >
@@ -412,6 +440,44 @@ async function submitQuiz(
 
         if (result.correct) {
 
+            const card =
+                document.getElementById(
+                    `quiz-card-${quizId}`
+                );
+
+            if (card) {
+
+                card.style.backgroundColor =
+                    "#d4edda";
+
+                card.style.border =
+                    "2px solid #28a745";
+
+            }
+
+            const radios =
+                document.querySelectorAll(
+                    `input[name="quiz_${quizId}"]`
+                );
+
+            radios.forEach(
+                radio => radio.disabled = true
+            );
+
+            const submitBtn =
+                document.getElementById(
+                    `submit-btn-${quizId}`
+                );
+
+            if (submitBtn) {
+
+                submitBtn.disabled = true;
+
+                submitBtn.innerText =
+                    "Completed";
+
+            }
+
             if (
                 !completedQuestions.has(
                     quizId
@@ -428,8 +494,13 @@ async function submitQuiz(
                 completedQuestions.size === 5
             ) {
 
+                alert(
+                    "Quiz completed successfully!"
+                );
+
                 window.location.href =
                     "/subtopic";
+
             }
 
         }
@@ -447,79 +518,61 @@ Correct Answer: ${result.correct_answer}`
         alert(error.message);
 
     }
-const viewProgressBtn =
-    document.getElementById(
-        "viewProgressBtn"
-    );
-
-if (viewProgressBtn) {
-
-    viewProgressBtn.addEventListener(
-        "click",
-        () => {
-
-            window.location.href =
-                "/progress";
-
-        }
-    );
-
-}
 }
 
 // ======================
 // PROGRESS PAGE
 // ======================
 
-async function loadProgress() {
+    async function loadProgress() {
 
-    const progressBar =
-        document.getElementById(
-            "progressBar"
-        );
-
-    const progressText =
-        document.getElementById(
-            "progressText"
-        );
-
-    if (
-        !progressBar ||
-        !progressText
-    ) {
-        return;
-    }
-
-    try {
-
-        const data =
-            await API.get(
-                "/api/progress"
+        const progressBar =
+            document.getElementById(
+                "progressBar"
             );
 
-        progressBar.style.width =
-            `${data.progress_percentage}%`;
+        const progressText =
+            document.getElementById(
+                "progressText"
+            );
 
-        progressBar.innerText =
-            `${data.progress_percentage}%`;
+        if (
+            !progressBar ||
+            !progressText
+        ) {
+            return;
+        }
 
-        progressText.innerText =
-            `${data.completed_subtopics} / ${data.total_subtopics} completed`;
+        try {
 
-    } catch (error) {
+            const data =
+                await API.get(
+                    "/api/progress"
+                );
 
-        console.error(error);
+            progressBar.style.width =
+                `${data.progress_percentage}%`;
+
+            progressBar.innerText =
+                `${data.progress_percentage}%`;
+
+            progressText.innerText =
+                `${data.completed_subtopics} / ${data.total_subtopics} completed`;
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+    }
+    if (
+        window.location.pathname ===
+        "/subtopic"
+    ) {
+
+        loadProgress();
 
     }
-}
-if (
-    window.location.pathname ===
-    "/subtopic"
-) {
-
-    loadProgress();
-
-}
 
 
 
