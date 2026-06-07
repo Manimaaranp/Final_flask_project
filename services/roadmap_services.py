@@ -8,49 +8,6 @@ from services.ai_service import (
 class RoadmapService:
 
     @staticmethod
-    def generate_mock_topics(career_name):
-        """
-        Temporary roadmap generator.
-        Gemini/OpenAI will replace this later.
-        """
-
-        mock_roadmaps = {
-            "Data Scientist": [
-                "Python",
-                "Statistics",
-                "Machine Learning",
-                "Deep Learning",
-                "Data Visualization"
-            ],
-
-            "AI Engineer": [
-                "Python",
-                "Machine Learning",
-                "Deep Learning",
-                "LLMs",
-                "MLOps"
-            ],
-
-            "Frontend Developer": [
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "React",
-                "Next.js"
-            ]
-        }
-
-        return mock_roadmaps.get(
-            career_name,
-            [
-                "Fundamentals",
-                "Intermediate Concepts",
-                "Projects",
-                "Advanced Concepts"
-            ]
-        )
-
-    @staticmethod
     def get_or_create_roadmap(career_name):
 
         career = Career.query.filter_by(

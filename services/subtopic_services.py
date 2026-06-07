@@ -8,63 +8,6 @@ from services.ai_service import (
 class SubTopicService:
 
     @staticmethod
-    def generate_mock_subtopics(topic_name):
-
-        mock_subtopics = {
-
-            "Python": [
-                "Variables",
-                "Loops",
-                "Functions",
-                "Object-Oriented Programming",
-                "Pandas"
-            ],
-
-            "Statistics": [
-                "Mean",
-                "Median",
-                "Probability",
-                "Hypothesis Testing",
-                "Distributions"
-            ],
-
-            "Machine Learning": [
-                "Supervised Learning",
-                "Unsupervised Learning",
-                "Regression",
-                "Classification",
-                "Model Evaluation"
-            ],
-
-            "Deep Learning": [
-                "Neural Networks",
-                "TensorFlow",
-                "PyTorch",
-                "CNN",
-                "RNN"
-            ],
-
-            "Data Visualization": [
-                "Matplotlib",
-                "Seaborn",
-                "Plotly",
-                "Dashboards",
-                "Storytelling"
-            ]
-        }
-
-        return mock_subtopics.get(
-            topic_name,
-            [
-                "Introduction",
-                "Fundamentals",
-                "Practice",
-                "Projects",
-                "Advanced Concepts"
-            ]
-        )
-
-    @staticmethod
     def get_or_create_subtopics(topic_name):
 
         topic = Topic.query.filter_by(
@@ -76,6 +19,7 @@ class SubTopicService:
             return {
                 "error": "Topic not found"
             }
+        
         career_name = topic.career.name
         existing_subtopics = SubTopic.query.filter_by(
             topic_id=topic.id

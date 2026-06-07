@@ -18,57 +18,6 @@ from services.progress_service import (
 class QuizService:
 
     @staticmethod
-    def generate_mock_quiz(
-        subtopic_name
-    ):
-
-        mock_quizzes = {
-
-            "Variables": [
-                {
-                    "question": "What is a variable?",
-                    "answer": "A container used to store data"
-                },
-                {
-                    "question": "Which symbol is used for assignment in Python?",
-                    "answer": "="
-                }
-            ],
-
-            "Loops": [
-                {
-                    "question": "Which loop repeats a fixed number of times?",
-                    "answer": "for loop"
-                },
-                {
-                    "question": "Which loop continues while a condition is true?",
-                    "answer": "while loop"
-                }
-            ],
-
-            "Functions": [
-                {
-                    "question": "Which keyword defines a function?",
-                    "answer": "def"
-                },
-                {
-                    "question": "Why are functions used?",
-                    "answer": "Code reusability"
-                }
-            ]
-        }
-
-        return mock_quizzes.get(
-            subtopic_name,
-            [
-                {
-                    "question": f"What is {subtopic_name}?",
-                    "answer": "Sample Answer"
-                }
-            ]
-        )
-
-    @staticmethod
     def get_or_create_quiz(
         subtopic_name
     ):
