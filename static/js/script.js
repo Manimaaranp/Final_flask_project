@@ -576,27 +576,7 @@ Correct Answer: ${result.correct_answer}`
 
 
 
-// ======================
-// LOGIN
-// ======================
 
-function login() {
-
-    alert(
-        "Authentication backend not implemented yet."
-    );
-}
-
-// ======================
-// SIGNUP
-// ======================
-
-function signup() {
-
-    alert(
-        "Authentication backend not implemented yet."
-    );
-}
 
 // ======================
 // AUTO LOAD
