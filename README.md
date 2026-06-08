@@ -114,7 +114,7 @@ project-root/
 
 Application URL:
 
-https://your-render-url.onrender.com
+https://career-roadmap-generator-bqr9.onrender.com
 
 
 ## Installation
