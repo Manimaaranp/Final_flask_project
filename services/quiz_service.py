@@ -83,21 +83,26 @@ class QuizService:
             db.session.add(quiz)
 
         db.session.commit()
+        
+        saved_quizzes = Quiz.query.filter_by(
+          subtopic_id=subtopic.id
+      ).all()
 
         return {
-            "subtopic": subtopic.name,
-            "quiz": [
-                {
-                    "question": q["question"],
-                    "option_a": q["option_a"],
-                    "option_b": q["option_b"],
-                    "option_c": q["option_c"],
-                    "option_d": q["option_d"]
-                }
-                for q in generated_quiz
-            ],
-            "source": "generated"
-        }
+          "subtopic": subtopic.name,
+          "quiz": [
+              {
+                  "id": q.id,
+                  "question": q.question,
+                  "option_a": q.option_a,
+                  "option_b": q.option_b,
+                  "option_c": q.option_c,
+                  "option_d": q.option_d
+              }
+              for q in saved_quizzes
+          ],
+          "source": "generated"
+      }
     @staticmethod
     def verify_quiz_answer(
         quiz_id,
